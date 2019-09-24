@@ -13,9 +13,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/login_email"
+            android:text="@string/profile_title"
             android:textStyle="bold"
             android:textSize="20dp"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/profile_name"
+
+            android:textSize="15dp"/>
 
 
 
@@ -32,10 +48,11 @@
             android:layout_gravity="fill"
             android:inputType="textEmailAddress"
 
-            android:hint="@string/login_hint_email"
+            android:hint="@string/profile_name_hint"
             android:autofillHints="" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,9 +62,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/login_password"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:text="@string/profile_email"
+
+            android:textSize="15dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -60,7 +77,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="fill"
+            android:hint="@string/profile_email_hint"
             android:inputType="textPassword" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/profile_picture"
+
+            android:textSize="15dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -71,11 +103,23 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/login_btn"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/profile_picture_hint"
+
+            android:textSize="15dp"/>
+
+    </LinearLayout>
 
 
 
