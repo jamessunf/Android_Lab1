@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name" translatable="false">Español Android</string>
+    <string name="hello_message" translatable="false">¡Hola, Android World!</string>
+    <string name="ButtonText" translatable="false">Soy un boton</string>>
+    <string name="title" translatable="false">Mira mi GUI</string>
+    <string name="ButtonClick" translatable="false">HAGA CLIC AQUÍ</string>
+    <string name="CheckBox" translatable="false">¡Mira esto!</string>
+    <string name="flagName" translatable="false">Español</string>
+    <string name="SwitchName" translatable="false">Cambiar En/Apagado</string>
+    <string name="hint" translatable="false">Escriba aquí</string>
+    <string name="Input" translatable="false">entrada</string>
+    <string name="flg" translatable="false">bandera</string>
+
+
+</resources>

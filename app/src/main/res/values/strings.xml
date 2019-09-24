@@ -1,0 +1,30 @@
+<resources>
+
+    <string translatable="false" name="app_name">Android English</string>
+    <string translatable="false" name="hello_message">Hello cccc Android World!</string>
+    <string translatable="false" name="ButtonText">I\'m a button</string>
+
+    <string translatable="false" name="title">Look at my GUI</string>
+    <string translatable="false" name="ButtonClick">CLICK HERE</string>
+    <string translatable="false" name="CheckBox">Check this out!</string>
+    <string translatable="false" name="flagName">Canada</string>
+    <string translatable="false" name="SwitchName">Switch On/Off</string>
+    <string translatable="false" name="hint">Type here</string>
+    <string translatable="false" name="Input">input</string>
+    <string translatable="false" name="flg">flag</string>
+
+    <string translatable="false" name="login_email">Enter your email address:</string>
+    <string translatable="false" name="login_password">Type your password:</string>
+    <string translatable="false" name="login_btn">LOGIN</string>
+    <string translatable="false" name="login_hint_email">Type email here</string>
+
+    <string translatable="false" name="profile_title">Your profile</string>
+    <string translatable="false" name="profile_name">Your name:</string>
+    <string translatable="false" name="profile_email">Your email:</string>
+    <string translatable="false" name="profile_picture">Your picture:</string>
+    <string translatable="false" name="profile_name_hint">Enter your name</string>
+    <string translatable="false" name="profile_email_hint">Enter your email</string>
+    <string translatable="false" name="profile_picture_hint">Click the button above to take a picture</string>
+
+
+</resources>
