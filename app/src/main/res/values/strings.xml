@@ -25,6 +25,7 @@
     <string translatable="false" name="profile_name_hint">Enter your name</string>
     <string translatable="false" name="profile_email_hint">Enter your email</string>
     <string translatable="false" name="profile_picture_hint">Click the button above to take a picture</string>
+    <string name="button">Button</string>
 
 
 </resources>
