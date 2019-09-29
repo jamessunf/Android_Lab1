@@ -4,10 +4,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -16,6 +23,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
 
     EditText edtProfileEmail;
+    ImageButton btnPic;
+   // ImageView mImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         edtProfileEmail = (EditText) findViewById(R.id.email_profile);
+        btnPic = (ImageButton) findViewById(R.id.btn_pic);
+       // mImageButton = (ImageButton) findViewById(R.id.btn_pic);
 
         Bundle loginEmail = getIntent().getExtras();
         if(loginEmail == null){
@@ -31,6 +42,28 @@ public class ProfileActivity extends AppCompatActivity {
         String loginE = loginEmail.getString("userEmail");
         edtProfileEmail.setText(loginE);
 
+        //picture
+
+        btnPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dispatchTakePictureIntent();
+            }
+
+            private void dispatchTakePictureIntent() {
+
+             //  Toast.makeText(getApplicationContext(),"It's picture!!", Toast.LENGTH_LONG).show();
+
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+
+
+        //*********Log***************************
         Log.i(ACTIVITY_NAME, "In function: onCreate");
 
 
@@ -73,11 +106,18 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            btnPic.setImageBitmap(imageBitmap);
+        }
 
         Log.i(ACTIVITY_NAME, "In function: onActivityResult");
     }
-
+/*
     private void dispatchTakePictureIntent() {
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -85,5 +125,5 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
-
+*/
 }

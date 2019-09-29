@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     Button btn;
-    Button btn2;
+   // Button btn2;
     EditText edtLoginEmail, edtPassword;
 
 
@@ -26,14 +26,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        //setContentView(R.layout.activity_profile);
+
+
+
+
 
         btn = (Button) findViewById(R.id.btn_login);
-        btn2 = (Button) findViewById(R.id.btn_login2);
-
         edtLoginEmail = (EditText) findViewById(R.id.email_login);
         edtPassword = (EditText) findViewById(R.id.login_password);
-
-
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -45,15 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 saveInfo();
                 openProfile();
 
-
-
-            }
-        });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // displayData(view);
             }
         });
 
