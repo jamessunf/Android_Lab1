@@ -12,5 +12,18 @@
     <string name="Input" translatable="false">entrada</string>
     <string name="flg" translatable="false">bandera</string>
 
+    <string name="login_email" translatable="false">Ingrese su dirección de correo electrónico:</string>
+    <string name="login_password" translatable="false">Escribe tu contraseña:</string>
+    <string name="login_btn" translatable="false">INICIAR SESIÓN</string>
+    <string name="login_hint_email" translatable="false">Escriba correo electrónico aquí</string>
+
+    <string name="profile_title" translatable="false">Tu perfil</string>
+    <string name="profile_name" translatable="false">Tu nombre:</string>
+    <string name="profile_email" translatable="false">Tu correo electrónico:</string>
+    <string name="profile_picture" translatable="false">Su imagen:</string>
+    <string name="profile_name_hint" translatable="false">Introduzca su nombre</string>
+    <string name="profile_email_hint" translatable="false">Introduce tu correo electrónico</string>
+    <string name="profile_picture_hint" translatable="false">Haz clic en el botón de arriba para tomar una foto.</string>
+
 
 </resources>

@@ -83,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.i(ACTIVITY_NAME, "In function: onResume");
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
