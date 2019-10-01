@@ -26,5 +26,6 @@
     <string name="profile_email_hint" translatable="false">Enter your email</string>
     <string name="profile_picture_hint" translatable="false">Click the button above to take a picture</string>
 
+    <string name="profile_button" translatable="false">Go to Chat</string>
 
 </resources>

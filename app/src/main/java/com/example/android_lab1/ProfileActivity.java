@@ -24,7 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     EditText edtProfileEmail;
     ImageButton btnPic;
-   // ImageView mImageButton;
+    Button btnChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         edtProfileEmail = (EditText) findViewById(R.id.email_profile);
         btnPic = (ImageButton) findViewById(R.id.btn_pic);
-       // mImageButton = (ImageButton) findViewById(R.id.btn_pic);
+        btnChat = (Button) findViewById(R.id.btn_gotochat);
 
         Bundle loginEmail = getIntent().getExtras();
         if(loginEmail == null){
@@ -62,11 +62,28 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //***********Lab 4 ******************
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openActivityChat();
+
+            }
+        });
+
 
         //*********Log***************************
         Log.i(ACTIVITY_NAME, "In function: onCreate");
 
 
+    }
+
+    private void openActivityChat() {
+
+        Intent intent = new Intent(this, ChatRoomActivity.class);
+        startActivity(intent);
     }
 
     @Override
