@@ -27,5 +27,8 @@
     <string name="profile_picture_hint" translatable="false">Click the button above to take a picture</string>
 
     <string name="profile_button" translatable="false">Go to Chat</string>
+    <string name="btn_send" translatable="false">Send</string>
+    <string name="btn_receive" translatable="false">Receive</string>
+    <string name="hit" translatable="false">Type here...</string>
 
 </resources>

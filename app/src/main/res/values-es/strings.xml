@@ -25,5 +25,10 @@
     <string name="profile_email_hint" translatable="false">Introduce tu correo electrónico</string>
     <string name="profile_picture_hint" translatable="false">Haz clic en el botón de arriba para tomar una foto.</string>
 
+    <string name="profile_button" translatable="false">Ir al chat</string>
+    <string name="btn_send" translatable="false">Enviar</string>
+    <string name="btn_receive" translatable="false">Recibir</string>
+    <string name="hit" translatable="false">Escriba aquí...</string>
+
 
 </resources>
