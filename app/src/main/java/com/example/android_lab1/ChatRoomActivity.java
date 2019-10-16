@@ -28,7 +28,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         msgInput = (EditText) findViewById(R.id.msg_input);
 
         listView = (ListView)findViewById(R.id.list_chart);
-        //setData();
+        //setData() ;
         friends = new LinkedList<FriendInfo>();
         setListViewAdapter();
 
