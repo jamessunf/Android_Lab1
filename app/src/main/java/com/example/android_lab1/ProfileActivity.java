@@ -4,19 +4,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
+
 import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+
 import android.widget.Toast;
 
+
+
 public class ProfileActivity extends AppCompatActivity {
+
+     DatabaseHelper mydb;
+
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -48,18 +54,10 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dispatchTakePictureIntent();
+                viewAll();
             }
 
-            private void dispatchTakePictureIntent() {
 
-             //  Toast.makeText(getApplicationContext(),"It's picture!!", Toast.LENGTH_LONG).show();
-
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-            }
         });
 
         //***********Lab 4 ******************
@@ -68,7 +66,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                openActivityChat();
+                Intent intent = new Intent(ProfileActivity.this, ListViewActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -80,11 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void openActivityChat() {
 
-        Intent intent = new Intent(this, ChatRoomActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onStart() {
@@ -135,13 +130,26 @@ public class ProfileActivity extends AppCompatActivity {
 
         Log.i(ACTIVITY_NAME, "In function: onActivityResult");
     }
-/*
-    private void dispatchTakePictureIntent() {
 
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
+    private void viewAll() {
+
+        Cursor res = mydb.getAllData();
+/*
+        res.moveToFirst();
+        while(!res.isAfterLast()){
+            String msg = res.getString(res.getColumnIndex("MSG"));
+            int type =res.getInt(res.getColumnIndex("TYPE"));
+            if (type == 1) {
+                //friends.add(new FriendInfo(msg, true));
+                Toast.makeText(ProfileActivity.this,"MSG: " + msg,Toast.LENGTH_LONG).show();
+            }else if (type == 2){
+
+                // friends.add(new FriendInfo(msg, false));
+                Toast.makeText(ProfileActivity.this,"MSG: " + msg,Toast.LENGTH_LONG).show();
+            }
+            //Toast.makeText(ChatRoomActivity.this,"MSG: " + msg,Toast.LENGTH_LONG).show();
+            res.moveToNext();
+        }*/
     }
-*/
+
 }
