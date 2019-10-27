@@ -148,7 +148,7 @@ public class ListViewActivity extends Activity {
         }
 
     }
-
+/*
     private void deleteData(Person p){
         Integer deleteRows = myDb.deleteData(p);
         if(deleteRows>0)
@@ -157,7 +157,7 @@ public class ListViewActivity extends Activity {
             Toast.makeText(ListViewActivity.this,"The data not deleted.",Toast.LENGTH_LONG).show();
 
     }
-
+*/
   private void deleteAll(){
         myDb.deleteAll();
   }
