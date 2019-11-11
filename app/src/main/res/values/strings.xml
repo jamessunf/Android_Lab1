@@ -16,6 +16,7 @@
     <string name="login_email" translatable="false">Enter your email address:</string>
     <string name="login_password" translatable="false">Type your password:</string>
     <string name="login_btn" translatable="false">LOGIN</string>
+    <string name="weather_btn" translatable="false">Weather Forecast</string>
     <string name="login_hint_email" translatable="false">Type email here</string>
 
     <string name="profile_title" translatable="false">Your profile</string>
