@@ -92,6 +92,11 @@ public class WeatherForecastActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            txtTempValue.setText(ottawaWeather.getTemp_value());
+            txtTempMax.setText(ottawaWeather.getTemp_max());
+            txtTempMin.setText(ottawaWeather.getTemp_min());
+            txtUvValue.setText(ottawaWeather.getUv_value());
+            img_pic.setImageBitmap(ottawaWeather.getWeather_img());
 
         }
 
