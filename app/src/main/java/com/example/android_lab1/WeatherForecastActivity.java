@@ -12,17 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -68,7 +71,7 @@ public class WeatherForecastActivity extends AppCompatActivity {
 
     private void openHttp() {
         String[] urlPath = {"http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric",
-                             "http://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389" };
+                            "http://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389" };
 
         new HttpUtil().execute(urlPath);
 
@@ -223,7 +226,28 @@ public class WeatherForecastActivity extends AppCompatActivity {
     //************JSON*****************
         private void readJson(String url){
 
+            try {
+                URL jsonUrl = new URL(url);
+                HttpURLConnection urlConnection = (HttpURLConnection) jsonUrl.openConnection();
+                InputStream inputStream = urlConnection.getInputStream();
 
+                //Set up the JSON object parser:
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"),8);
+                StringBuilder sb = new StringBuilder();
+
+                String line = null;
+                while((line = reader.readLine()) != null){
+
+                    sb.append(line + "\n");
+
+                }
+                Toast.makeText(this,"Json:" + sb.toString(),Toast.LENGTH_LONG).show();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }
