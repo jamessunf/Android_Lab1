@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -236,16 +239,25 @@ public class WeatherForecastActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 String line = null;
-                while((line = reader.readLine()) != null){
-
+                while ((line = reader.readLine()) != null)
+                {
                     sb.append(line + "\n");
-
                 }
-                Toast.makeText(this,"Json:" + sb.toString(),Toast.LENGTH_LONG).show();
+                String result = sb.toString();
+
+                JSONObject jObject = new JSONObject(result);
+
+                    String value = Double.toString(jObject.getDouble("value"));
+                    ottawaWeather.setUv_value(value);
+                    Log.i("UV value(JSON):",value);
+
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
