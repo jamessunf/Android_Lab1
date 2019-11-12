@@ -101,10 +101,12 @@ public class WeatherForecastActivity extends AppCompatActivity {
         protected OttawaWeather doInBackground(String... strings) {
             //xml
             readXml(strings[0]);
+            publishProgress(25);
             //deal with icon
 
             //json
             readJson(strings[1]);
+            publishProgress(100);
 
             return ottawaWeather;
         }
@@ -117,6 +119,7 @@ public class WeatherForecastActivity extends AppCompatActivity {
             txtTempMin.setText(ottawaWeather.getTemp_min() + "  " + ottawaWeather.getTemp_unit());
             txtUvValue.setText(ottawaWeather.getUv_value());
             img_pic.setImageBitmap(ottawaWeather.getWeather_img());
+
             proBar.setVisibility(View.INVISIBLE);
 
         }
@@ -126,9 +129,10 @@ public class WeatherForecastActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
 
-            super.onProgressUpdate(values);
 
-           // proBar.setVisibility(View.VISIBLE);
+            proBar.setProgress(values[0]);
+
+
 
         }
 
@@ -160,6 +164,10 @@ public class WeatherForecastActivity extends AppCompatActivity {
                                 ottawaWeather.setTemp_min(xpp.getAttributeValue(null,"min"));
                                 ottawaWeather.setTemp_max(xpp.getAttributeValue(null,"max"));
                                 ottawaWeather.setTemp_unit(xpp.getAttributeValue(null,"unit"));
+                                publishProgress(50);
+
+
+
 
                             }else if(tagName.equals("weather")){
 
@@ -172,6 +180,8 @@ public class WeatherForecastActivity extends AppCompatActivity {
 
                                     readImageOnline(ottawaWeather.getIcon_name());
                                 }
+                                publishProgress(75);
+
                             }
                             break;
                         case END_TAG:
@@ -196,6 +206,9 @@ public class WeatherForecastActivity extends AppCompatActivity {
 
 
         }
+
+
+
     //*************ICON****************
     private void readImageOnline(String imgName){
 
