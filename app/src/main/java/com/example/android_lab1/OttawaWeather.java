@@ -7,6 +7,7 @@ public class OttawaWeather {
     private String temp_min;
     private String temp_max;
     private String uv_value;
+    private String temp_unit;
     private Bitmap weather_img;
     private String icon_name;
 
@@ -48,6 +49,14 @@ public class OttawaWeather {
 
     public void setWeather_img(Bitmap weather_img) {
         this.weather_img = weather_img;
+    }
+
+    public String getTemp_unit() {
+        return temp_unit;
+    }
+
+    public void setTemp_unit(String temp_unit) {
+        this.temp_unit = temp_unit;
     }
 
     public String getIcon_name() {

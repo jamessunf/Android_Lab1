@@ -65,7 +65,11 @@ public class WeatherForecastActivity extends AppCompatActivity {
         img_pic = (ImageView) findViewById(R.id.img_pic);
         proBar = (ProgressBar) findViewById(R.id.pro_bar);
         proBar.setVisibility(View.VISIBLE);
-        openHttp();
+
+        ottawaWeather = new OttawaWeather();
+
+       openHttp();
+
 
 
         btn_test.setOnClickListener(new View.OnClickListener() {
@@ -108,9 +112,9 @@ public class WeatherForecastActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            txtTempValue.setText(ottawaWeather.getTemp_value());
-            txtTempMax.setText(ottawaWeather.getTemp_max());
-            txtTempMin.setText(ottawaWeather.getTemp_min());
+            txtTempValue.setText(ottawaWeather.getTemp_value() + "  " + ottawaWeather.getTemp_unit());
+            txtTempMax.setText(ottawaWeather.getTemp_max() + "  " + ottawaWeather.getTemp_unit());
+            txtTempMin.setText(ottawaWeather.getTemp_min() + "  " + ottawaWeather.getTemp_unit());
             txtUvValue.setText(ottawaWeather.getUv_value());
             img_pic.setImageBitmap(ottawaWeather.getWeather_img());
             proBar.setVisibility(View.INVISIBLE);
@@ -145,7 +149,7 @@ public class WeatherForecastActivity extends AppCompatActivity {
                 //Iterate over the XML tags:
                 int EVENT_TYPE;
 
-                ottawaWeather = new OttawaWeather();
+
                 while((EVENT_TYPE = xpp.getEventType()) != XmlPullParser.END_DOCUMENT){
 
                     switch (EVENT_TYPE){
@@ -155,6 +159,7 @@ public class WeatherForecastActivity extends AppCompatActivity {
                                 ottawaWeather.setTemp_value(xpp.getAttributeValue(null,"value"));
                                 ottawaWeather.setTemp_min(xpp.getAttributeValue(null,"min"));
                                 ottawaWeather.setTemp_max(xpp.getAttributeValue(null,"max"));
+                                ottawaWeather.setTemp_unit(xpp.getAttributeValue(null,"unit"));
 
                             }else if(tagName.equals("weather")){
 
