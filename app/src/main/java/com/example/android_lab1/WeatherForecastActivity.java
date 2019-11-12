@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,9 @@ public class WeatherForecastActivity extends AppCompatActivity {
     Button btn_test;
     ImageView img_pic;
 
+
+    ProgressBar proBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +63,19 @@ public class WeatherForecastActivity extends AppCompatActivity {
 
         btn_test = (Button) findViewById(R.id.btn_test);
         img_pic = (ImageView) findViewById(R.id.img_pic);
+        proBar = (ProgressBar) findViewById(R.id.pro_bar);
+        proBar.setVisibility(View.VISIBLE);
+        openHttp();
+
 
         btn_test.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View view) {
+
                 openHttp();
+
             }
         });
 
@@ -103,12 +113,19 @@ public class WeatherForecastActivity extends AppCompatActivity {
             txtTempMin.setText(ottawaWeather.getTemp_min());
             txtUvValue.setText(ottawaWeather.getUv_value());
             img_pic.setImageBitmap(ottawaWeather.getWeather_img());
+            proBar.setVisibility(View.INVISIBLE);
 
         }
 
+
+
         @Override
         protected void onProgressUpdate(Integer... values) {
+
             super.onProgressUpdate(values);
+
+           // proBar.setVisibility(View.VISIBLE);
+
         }
 
         //***********XML******************
