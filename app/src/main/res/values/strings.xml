@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name" translatable="false">Android English</string>
+    <string name="app_name" translatable="false">My App</string>
     <string name="hello_message" translatable="false">Hello cccc Android World!</string>
     <string name="ButtonText" translatable="false">I\'m a button</string>
 

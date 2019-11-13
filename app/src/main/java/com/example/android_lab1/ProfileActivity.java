@@ -30,7 +30,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     EditText edtProfileEmail;
     ImageButton btnPic;
-    Button btnChat;
+    Button btnChat, btnToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         edtProfileEmail = (EditText) findViewById(R.id.email_profile);
         btnPic = (ImageButton) findViewById(R.id.btn_pic);
         btnChat = (Button) findViewById(R.id.btn_gotochat);
+        btnToolbar = (Button) findViewById(R.id.btn_goto_toolbar);
 
         Bundle loginEmail = getIntent().getExtras();
         if(loginEmail == null){
@@ -72,12 +74,23 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        btnToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ProfileActivity.this, ToolbarActivity.class );
+                startActivity(intent);
+
+            }
+        });
+
 
         //*********Log***************************
         Log.i(ACTIVITY_NAME, "In function: onCreate");
 
 
     }
+
 
 
 
