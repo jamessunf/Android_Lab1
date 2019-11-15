@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ToolbarActivity"></activity>
+        <activity android:name=".CarCharingActivity"></activity>
+        <activity android:name=".ToolbarActivity" />
         <activity android:name=".WeatherForecastActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ListViewActivity" />
