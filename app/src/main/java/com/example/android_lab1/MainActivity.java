@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
-    Button btn,btnWeather;
+    Button btn,btnWeather,btnCar;
    // Button btn2;
     EditText edtLoginEmail, edtPassword;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btn_login);
         btnWeather = (Button) findViewById(R.id.btn_weather);
+        btnCar = (Button) findViewById(R.id.btn_car);
 
         edtLoginEmail = (EditText) findViewById(R.id.email_login);
         edtPassword = (EditText) findViewById(R.id.login_password);
@@ -59,6 +60,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,CarCharingActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+
 
 
     }

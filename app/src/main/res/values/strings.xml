@@ -32,4 +32,10 @@
     <string name="btn_receive" translatable="false">Receive</string>
     <string name="hit" translatable="false">Type here...</string>
 
+    //final project
+    <string name="txt_title" translatable="false">Electric Car Charging Station Finder</string>
+    <string name="txt_lat" translatable="false">Latitude:</string>
+    <string name="txt_lon" translatable="false">Longitude:</string>
+    <string name="btn_find"  translatable="false">Find</string>
+
 </resources>
