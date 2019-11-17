@@ -17,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -41,11 +43,14 @@ import static org.xmlpull.v1.XmlPullParser.END_TAG;
 import static org.xmlpull.v1.XmlPullParser.START_TAG;
 import static org.xmlpull.v1.XmlPullParser.TEXT;
 
-public class CarCharingActivity extends AppCompatActivity {
+public class CarCharingActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
-    Button btnFind;
+    DatabaseHelper mydb;
+
+    Button btnFind,btnPopup;
     ListView lstResults;
     EditText edtLat,edtLon;
+    ProgressBar loading_locations;
 
 
     @Override
@@ -54,9 +59,21 @@ public class CarCharingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_car_charing);
 
         btnFind = (Button) findViewById(R.id.btn_find);
+        btnPopup = (Button) findViewById(R.id.btn_popup) ;
         lstResults = (ListView) findViewById(R.id.lst_results);
         edtLat =(EditText) findViewById(R.id.edt_lat);
         edtLon = (EditText) findViewById(R.id.edt_lon);
+        loading_locations = (ProgressBar) findViewById(R.id.loading_locations);
+
+
+
+
+        btnPopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(view);
+            }
+        });
 
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +83,7 @@ public class CarCharingActivity extends AppCompatActivity {
 
                     String dLat = edtLat.getText().toString();
                     String dLon = edtLon.getText().toString();
+                    loading_locations.setVisibility(View.VISIBLE);
 
                     String[] str = {"https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=" + dLat + "&longitude=" + dLon + "&maxresults=10"};
                     Log.i("url:",str[0]);
@@ -138,15 +156,48 @@ public class CarCharingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //******************** Pop up menu ********************
 
-    private class HttpUtil extends AsyncTask<String,String,ArrayList<EleCharging>>{
+    public void showPopup(View v){
+
+        PopupMenu popup = new PopupMenu(this,v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+
+            case R.id.popup_map:
+                Toast.makeText(this,"Open map",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.popup_save:
+                Toast.makeText(this,"Save Location",Toast.LENGTH_SHORT).show();
+
+                return true;
+            case R.id.popup_delete:
+                Toast.makeText(this,"Delete Location",Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return  false;
+
+        }
+    }
+
+
+    private class HttpUtil extends AsyncTask<String,Integer,ArrayList<EleCharging>>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loading_locations.setProgress(20);
+        }
 
         @Override
         protected ArrayList<EleCharging> doInBackground(String... strings) {
-
-           // strings[0] = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=45.347571&longitude=-75.756140&maxresults=10";
-
-
 
            return readJson(strings[0]);
 
@@ -155,16 +206,18 @@ public class CarCharingActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final ArrayList<EleCharging> eleChargings) {
-
-
-
-
             lstResults.setAdapter(new CarCharingListAdapter(CarCharingActivity.this,eleChargings));
+
+
+
             lstResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    Toast.makeText(CarCharingActivity.this,eleChargings.get(i).getLocalTitle(),Toast.LENGTH_SHORT).show();
+                    showPopup(view);
+
+
+                  //  Toast.makeText(CarCharingActivity.this,eleChargings.get(i).getLocalTitle(),Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -175,10 +228,10 @@ public class CarCharingActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-        }
+        protected void onProgressUpdate(Integer... values) {
 
+            loading_locations.setProgress(values[0]);
+        }
 
         //************JSON*****************
         private ArrayList<EleCharging> readJson(String url){
@@ -194,6 +247,7 @@ public class CarCharingActivity extends AppCompatActivity {
                 //Set up the JSON object parser:
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"),8);
                 StringBuilder sb = new StringBuilder();
+                publishProgress(25);
 
                 String line = null;
                // eleCharging = new EleCharging();
@@ -202,6 +256,7 @@ public class CarCharingActivity extends AppCompatActivity {
                     sb.append(line + "\n");
                 }
                 String result = sb.toString();
+                publishProgress(75);
 
 
                 JSONArray root = new JSONArray(result);
@@ -228,6 +283,7 @@ public class CarCharingActivity extends AppCompatActivity {
                     Log.i("Phone:",eleChargings.get(i).getPhoneNumber());
 
                 }
+                publishProgress(100);
 
 
             } catch (MalformedURLException e) {

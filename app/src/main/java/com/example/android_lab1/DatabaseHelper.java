@@ -6,13 +6,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "chat.db";
-    private static final String TABLE_NAME = "massage_table";
+    private static final String DATABASE_NAME = "cLocation.db";
+    private static final String TABLE_NAME = "location_table";
     private static final String COL_1 = "ID";
-    private static final String COL_2 = "SEND";
-    private static final String COL_3 = "MASSAGE";
+    private static final String COL_2 = "TITLE";
+    private static final String COL_3 = "ADDRESS";
+    private static final String COL_4 = "LATITUDE";
+    private static final String COL_5 = "LONGITUDE";
+    private static final String COL_6 = "PHONE";
+
 
 
 
@@ -24,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, SEND INTEGER, MASSAGE TEXT)");
+        sqLiteDatabase.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT,ADDRESS TEXT,LATITUDE TEXT,LONGITUDE TEXT,PHONE TEXT)");
 
 
     }
@@ -36,11 +42,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(Person person){
+    public boolean insertData(EleCharging eleCharging){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2,person.getSend());
-        contentValues.put(COL_3,person.getMassage());
+        contentValues.put(COL_2,eleCharging.getLocalTitle());
+        contentValues.put(COL_3,eleCharging.getAddr());
+        contentValues.put(COL_4,eleCharging.getdLatitude());
+        contentValues.put(COL_5,eleCharging.getdLongitude());
+        contentValues.put(COL_6,eleCharging.getPhoneNumber());
+
+
+
         long result = db.insert(TABLE_NAME,null,contentValues);
 
         if(result == -1)
@@ -51,10 +63,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getAllData(){
+    public ArrayList<EleCharging> getAllData(){
+
+        ArrayList<EleCharging> eleChargings = null;
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
-        return res;
+
+        if(res.getCount() != 0){
+            eleChargings.clear();
+            while (res.moveToNext()){
+                eleChargings.add(new EleCharging(res.getString(res.getColumnIndex("ID")),
+                        res.getString(res.getColumnIndex("TITLE")),
+                        res.getString(res.getColumnIndex("ADDRESS")),
+                        res.getString(res.getColumnIndex("LATITUDE")),
+                        res.getString(res.getColumnIndex("LONGITUDE")),
+                        res.getString(res.getColumnIndex("PHONE"))
+                        ));
+            }
+
+        }
+        return eleChargings;
 
     }
 
@@ -64,31 +93,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-/*
 
-    public long updateData(String id, int send, String massage){
+    public long deleteData (String id){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,id);
-        contentValues.put(COL_2,send);
-        contentValues.put(COL_3,massage);
-        return db.update(TABLE_NAME, contentValues,"ID=?",new String[]{ id });
-
+        return db.delete(TABLE_NAME,"ID=?",new String[]{id});
 
 
     }
 
-    public long deleteData (Person p){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME,"MASSAGE=?",new String[]{p.getMassage()});
-
-
-    }
-
-*/
-    public void deleteAll(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from " + TABLE_NAME);
-
-    }
 }

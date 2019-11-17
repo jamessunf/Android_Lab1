@@ -1,6 +1,7 @@
 package com.example.android_lab1;
 
 public class EleCharging {
+    private String id;
     private String localTitle;
     private String addr;
 
@@ -16,7 +17,14 @@ public class EleCharging {
         this.phoneNumber = phoneNumber;
     }
 
-
+    public EleCharging(String id, String localTitle, String addr, String dLatitude, String dLongitude, String phoneNumber) {
+        this.id = id;
+        this.localTitle = localTitle;
+        this.addr = addr;
+        this.dLatitude = Double.valueOf(dLatitude);
+        this.dLongitude = Double.valueOf(dLongitude);
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getLocalTitle() {
         return localTitle;

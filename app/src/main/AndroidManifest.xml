@@ -20,7 +20,6 @@
         <activity android:name=".ToolbarActivity" />
         <activity android:name=".WeatherForecastActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".ListViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
