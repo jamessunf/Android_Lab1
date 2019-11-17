@@ -68,8 +68,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ProfileActivity.this, ListViewActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(ProfileActivity.this, ListViewActivity.class);
+               // startActivity(intent);
 
             }
         });
@@ -146,7 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void viewAll() {
 
-        Cursor res = mydb.getAllData();
+       // Cursor res = mydb.getAllData();
 /*
         res.moveToFirst();
         while(!res.isAfterLast()){
