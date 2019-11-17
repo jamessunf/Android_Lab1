@@ -29,7 +29,7 @@
             android:text="@string/txt_lat"/>
         <EditText
             android:id="@+id/edt_lat"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_width="100dp"
             android:layout_height="50dp"
           />
@@ -39,7 +39,7 @@
             android:text="@string/txt_lon"/>
         <EditText
             android:id="@+id/edt_lon"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_width="100dp"
             android:layout_height="50dp"
             />

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -36,8 +37,6 @@ public class CarCharingActivity extends AppCompatActivity {
     ListView lstResults;
     EditText edtLat,edtLon;
 
-    ArrayList<EleCharging>  eleChargings = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,8 @@ public class CarCharingActivity extends AppCompatActivity {
                     String dLat = edtLat.getText().toString();
                     String dLon = edtLon.getText().toString();
 
-                    String[] str = {"https://api.openchargemap.io/v3/poi/?output=xml&countrycode=CA&latitude=" + dLat + "&longitude=" + dLon + "&maxresults=10"};
+                    String[] str = {"https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=" + dLat + "&longitude=" + dLon + "&maxresults=10"};
+                    Log.i("url:",str[0]);
                     new HttpUtil().execute(str);
 
 
@@ -76,22 +76,31 @@ public class CarCharingActivity extends AppCompatActivity {
     }
 
 
-    private class HttpUtil extends AsyncTask<String,String,String>{
+    private class HttpUtil extends AsyncTask<String,String,ArrayList<EleCharging>>{
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected ArrayList<EleCharging> doInBackground(String... strings) {
 
-            strings[0] = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=45.347571&longitude=-75.756140&maxresults=1";
+           // strings[0] = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=45.347571&longitude=-75.756140&maxresults=10";
 
-            readJson(strings[0]);
 
-            return null;
+
+           return readJson(strings[0]);
+
+
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            Toast.makeText(CarCharingActivity.this, eleChargings.get(0).getLocalTitle(), Toast.LENGTH_SHORT).show();
-            super.onPostExecute(s);
+        protected void onPostExecute(ArrayList<EleCharging> eleChargings) {
+
+
+
+
+            lstResults.setAdapter(new CarCharingListAdapter(CarCharingActivity.this,eleChargings));
+
+
+
+
         }
 
         @Override
@@ -101,7 +110,10 @@ public class CarCharingActivity extends AppCompatActivity {
 
 
         //************JSON*****************
-        private void readJson(String url){
+        private ArrayList<EleCharging> readJson(String url){
+
+           // EleCharging eleCharging = null;
+            ArrayList<EleCharging> eleChargings = new ArrayList<>();
 
             try {
                 URL jsonUrl = new URL(url);
@@ -113,18 +125,38 @@ public class CarCharingActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 String line = null;
+               // eleCharging = new EleCharging();
                 while ((line = reader.readLine()) != null)
                 {
                     sb.append(line + "\n");
                 }
                 String result = sb.toString();
 
-                JSONObject jObject = new JSONObject(result);
 
-                String value = jObject.getString("Title");
-               // ottawaWeather.setUv_value(value);
-                Log.i("UV value(JSON):",value);
+                JSONArray root = new JSONArray(result);
 
+
+                for(int i=0;i<root.length();i++){
+
+                    JSONObject jsonObject = root.getJSONObject(i);
+                        JSONObject addressInfo = jsonObject.getJSONObject("AddressInfo");
+
+                       eleChargings.add(new EleCharging(addressInfo.getString("Title"),
+                                                        addressInfo.getString("AddressLine1"),
+                                                        addressInfo.getDouble("Latitude"),
+                                                        addressInfo.getDouble("Longitude"),
+                                                        addressInfo.getString("ContactTelephone1")));
+
+                }
+
+                for(int i=0;i<eleChargings.size();i++){
+                    Log.i("title:",eleChargings.get(i).getLocalTitle());
+                    Log.i("title:",eleChargings.get(i).getAddr());
+                    Log.i("Lon:",Double.toString(eleChargings.get(i).getdLongitude()));
+                    Log.i("Lat:",Double.toString(eleChargings.get(i).getdLatitude()));
+                    Log.i("Phone:",eleChargings.get(i).getPhoneNumber());
+
+                }
 
 
             } catch (MalformedURLException e) {
@@ -135,7 +167,7 @@ public class CarCharingActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
+                return eleChargings;
         }
 
 
