@@ -1,15 +1,25 @@
 package com.example.android_lab1;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,6 +85,59 @@ public class CarCharingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_list,menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this,"This is the initial message",Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.item4:
+                Toast.makeText(this,"You clicked on the overflow",Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setIcon(R.drawable.icon4);
+                builder.setTitle("What is your new message?");
+
+                // Set up the input
+                final EditText input = new EditText(this);
+                input.setHint("Type here");
+                input.setTextSize(25);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                      //  m_Text = input.getText().toString();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
+                return true;
+
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private class HttpUtil extends AsyncTask<String,String,ArrayList<EleCharging>>{
 
@@ -91,12 +154,20 @@ public class CarCharingActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<EleCharging> eleChargings) {
+        protected void onPostExecute(final ArrayList<EleCharging> eleChargings) {
 
 
 
 
             lstResults.setAdapter(new CarCharingListAdapter(CarCharingActivity.this,eleChargings));
+            lstResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Toast.makeText(CarCharingActivity.this,eleChargings.get(i).getLocalTitle(),Toast.LENGTH_SHORT).show();
+
+                }
+            });
 
 
 

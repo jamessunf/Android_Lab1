@@ -45,23 +45,7 @@ public class ToolbarActivity extends AppCompatActivity {
             case R.id.item1:
                 Toast.makeText(this,"This is the initial message",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.item2:
-                Toast.makeText(this,m_Text,Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item3:
-                Snackbar.make(findViewById(android.R.id.content), "This is main activity", Snackbar.LENGTH_LONG)
-                        .setAction("CLOSE", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
 
-                                finish();
-
-                            }
-                        })
-                        .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
-                        .show();
-
-                return true;
             case R.id.item4:
                 Toast.makeText(this,"You clicked on the overflow",Toast.LENGTH_SHORT).show();
 
