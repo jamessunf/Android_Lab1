@@ -1,4 +1,4 @@
-package com.example.android_lab1;
+package com.example.android_lab1.carcharing_locations;
 
 public class EleCharging {
     private String id;

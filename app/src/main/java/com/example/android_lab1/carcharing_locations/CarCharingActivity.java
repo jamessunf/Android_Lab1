@@ -1,10 +1,12 @@
-package com.example.android_lab1;
+package com.example.android_lab1.carcharing_locations;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -21,14 +23,12 @@ import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.android_lab1.R;
+import com.example.android_lab1.forex.forexActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,14 +39,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static org.xmlpull.v1.XmlPullParser.END_TAG;
-import static org.xmlpull.v1.XmlPullParser.START_TAG;
-import static org.xmlpull.v1.XmlPullParser.TEXT;
-
 public class CarCharingActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     DatabaseHelper mydb;
   //  ArrayList<EleCharging> eleAllResults, eleFavResults;
+
+    EleCharging eleSelectLoction;
 
 
     Button btnFind,btnPopup;
@@ -126,7 +124,7 @@ public class CarCharingActivity extends AppCompatActivity implements PopupMenu.O
                 Toast.makeText(this,"You clicked on the overflow",Toast.LENGTH_SHORT).show();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setIcon(R.drawable.icon4);
+                builder.setIcon(R.drawable.flag);
                 builder.setTitle("What is your new message?");
 
                 // Set up the input
@@ -176,10 +174,22 @@ public class CarCharingActivity extends AppCompatActivity implements PopupMenu.O
         switch (menuItem.getItemId()){
 
             case R.id.popup_map:
-                Toast.makeText(this,"Open map",Toast.LENGTH_SHORT).show();
+
+                Uri gmmIntentUri = Uri.parse("geo:" + eleSelectLoction.getdLatitude() + "," + eleSelectLoction.getdLongitude());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                startActivity(mapIntent);
+
                 return true;
             case R.id.popup_save:
+                boolean isSave = mydb.insertData(eleSelectLoction);
+                if(isSave) {
+                    Toast.makeText(this, eleSelectLoction.getLocalTitle() + "is Saved", Toast.LENGTH_SHORT).show();
+                }else{
 
+                    Toast.makeText(this, eleSelectLoction.getLocalTitle() + "isn't Saved", Toast.LENGTH_SHORT).show();
+                }
 
                 return true;
             case R.id.popup_delete:
@@ -215,7 +225,9 @@ public class CarCharingActivity extends AppCompatActivity implements PopupMenu.O
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    Toast.makeText(CarCharingActivity.this,eleChargings.get(i).getLocalTitle(),Toast.LENGTH_SHORT).show();
+                    eleSelectLoction = eleChargings.get(i);
+
+                    Toast.makeText(CarCharingActivity.this,eleSelectLoction.getLocalTitle(),Toast.LENGTH_SHORT).show();
 
                     showPopup(view);
 

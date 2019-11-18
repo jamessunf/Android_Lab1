@@ -11,7 +11,6 @@
 
     <item android:id="@+id/item4"
         android:title="Item 4"
-        android:icon="@drawable/icon1"
         app:showAsAction="never"/>
 
 </menu>
