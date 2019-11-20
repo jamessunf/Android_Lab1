@@ -38,9 +38,11 @@
         <activity
             android:name=".carcharing_locations.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".forex.forexActivity" />
+        <activity android:name=".recipe.RecipeMainActivity" />
         <activity android:name=".carcharing_locations.CarCharingActivity" />
         <activity android:name=".MainActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

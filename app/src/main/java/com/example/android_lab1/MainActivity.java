@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.android_lab1.carcharing_locations.CarCharingActivity;
 import com.example.android_lab1.forex.forexActivity;
+import com.example.android_lab1.recipe.RecipeMainActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openRecipe() {
-        //Intent intent = new Intent(this, recipeActivity.class);
-       // startActivity(intent);
+        Intent intent = new Intent(this, RecipeMainActivity.class);
+        startActivity(intent);
     }
 
     private void openNews() {
