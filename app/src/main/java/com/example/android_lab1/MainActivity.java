@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
-    Button btn,btnWeather;
+    Button btn,btnWeather,btnC;
    // Button btn2;
     EditText edtLoginEmail, edtPassword;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btn_login);
         btnWeather = (Button) findViewById(R.id.btn_weather);
+        btnC = (Button) findViewById(R.id.btn_c) ;
 
         edtLoginEmail = (EditText) findViewById(R.id.email_login);
         edtPassword = (EditText) findViewById(R.id.login_password);
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 // Toast.makeText(getApplicationContext(),"It's magic!", Toast.LENGTH_LONG).show();
                 //edtUserE.setText(edtEmail.getText());
                 saveInfo();
-                openProfile();
+               // openProfile();
 
             }
         });
@@ -59,21 +60,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        btnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Lab8Activity.class);
+                startActivity(intent);
+
+            }
+        });
 
 
     }
 
-    public void openProfile() {
-        Intent intent = new Intent(this, ProfileActivity.class);
-
-        String userEmail = edtLoginEmail.getText().toString();
-        intent.putExtra("userEmail", userEmail);
-
-
-
-        startActivity(intent);
-
-    }
 
     @Override
     protected void onPause() {

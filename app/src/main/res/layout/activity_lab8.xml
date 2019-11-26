@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Lab8Activity">
+
+    <ListView
+        android:id="@+id/lst_person"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edt_input"
+        android:layout_width="250dp"
+        android:layout_below="@id/lst_person"
+        android:layout_height="wrap_content"
+        android:hint="Please input here."/>
+
+
+
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="100dp"
+        android:layout_toRightOf="@id/edt_input"
+        android:layout_below="@id/lst_person"
+        android:layout_height="wrap_content"
+        android:text="Send"/>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_toRightOf="@id/lst_person"/>
+
+
+</RelativeLayout>

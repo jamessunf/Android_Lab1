@@ -87,6 +87,11 @@
             android:layout_weight="1"
             android:text="@string/weather_btn"
             />
+        <Button
+            android:id="@+id/btn_c"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Chat"/>
     </LinearLayout>
 
     <LinearLayout

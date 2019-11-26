@@ -17,7 +17,7 @@ public class CustomListAdapter extends BaseAdapter {
     private ArrayList<Person> person;
 
 
-    public CustomListAdapter(ListViewActivity context, ArrayList<Person> p) {
+    public CustomListAdapter(Lab8Activity context, ArrayList<Person> p) {
         this.myContext = context;
         this.myLayoutInflater = LayoutInflater.from(context);
         this.person = p;

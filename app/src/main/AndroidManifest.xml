@@ -16,10 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ToolbarActivity"></activity>
+        <activity android:name=".Lab8Activity"></activity>
+        <activity android:name=".ToolbarActivity" />
         <activity android:name=".WeatherForecastActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ListViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
