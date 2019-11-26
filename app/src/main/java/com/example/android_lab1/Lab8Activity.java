@@ -41,31 +41,39 @@ public class Lab8Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(Lab8Activity.this,"id:" + position,Toast.LENGTH_SHORT).show();
+                String strId = String.valueOf(position);
+
+                Toast.makeText(Lab8Activity.this,strId,Toast.LENGTH_SHORT).show();
+                firstFragment = FirstFragment.newInstance(strId,person.get(position).getMassage());
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,firstFragment,"first_frag").commitAllowingStateLoss();
+
 
 
                     }
                 });
 
+       // getSupportFragmentManager().beginTransaction().add(R.id.fl_container,firstFragment,"first_frag").commitAllowingStateLoss();
 
 
-        firstFragment = new FirstFragment();
 
         FirstFragment firstFragment = new FirstFragment();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_container,firstFragment,"first_frag").commitAllowingStateLoss();
+
 
         person = new ArrayList<>();
         viewData();
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-
+                insertData(new Person(0,edtInput.getText().toString()));
+                edtInput.setText(null);
 
             }
         });
+
+
     }
 
     private void viewData(){

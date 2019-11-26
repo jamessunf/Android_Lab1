@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:layout_width="280dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="10dp"
@@ -21,7 +21,7 @@
             android:id="@+id/txt_receive_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello"
+            android:text="Send:"
             />
         <TextView
             android:id="@+id/txt_receive_message"

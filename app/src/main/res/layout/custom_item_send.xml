@@ -27,7 +27,7 @@
             android:id="@+id/txt_send_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello"
+            android:text="Send Message:"
             />
         <TextView
             android:id="@+id/txt_send_message"

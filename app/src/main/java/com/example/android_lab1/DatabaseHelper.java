@@ -64,31 +64,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-/*
 
-    public long updateData(String id, int send, String massage){
+
+    public long deleteData (String id){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,id);
-        contentValues.put(COL_2,send);
-        contentValues.put(COL_3,massage);
-        return db.update(TABLE_NAME, contentValues,"ID=?",new String[]{ id });
-
+        return db.delete(TABLE_NAME,"ID=?",new String[]{id});
 
 
     }
 
-    public long deleteData (Person p){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME,"MASSAGE=?",new String[]{p.getMassage()});
 
-
-    }
-
-*/
-    public void deleteAll(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from " + TABLE_NAME);
-
-    }
 }
