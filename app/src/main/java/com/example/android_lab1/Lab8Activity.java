@@ -49,7 +49,7 @@ public class Lab8Activity extends AppCompatActivity {
                firstFragment = FirstFragment.newInstance(strId,person.get(position).getMassage());
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,firstFragment,"first_frag").commitAllowingStateLoss();
 
-              //  myDb.deleteData(person.get(position).getMassage());
+               // myDb.deleteData(person.get(position).getMassage());
                 viewData();
 
 

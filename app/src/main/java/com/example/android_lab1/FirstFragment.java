@@ -58,7 +58,7 @@ public class FirstFragment extends Fragment {
               String msg = getArguments().getString("input_msg");
 
                long input_id = mydb.deleteData(msg);
-                Toast.makeText(getActivity(),"del=" + getArguments().getString("input_id"),Toast.LENGTH_SHORT).show();
+               Toast.makeText(getActivity(),"deleted:" + getArguments().getString("input_id"),Toast.LENGTH_SHORT).show();
 
             }
         });
