@@ -66,9 +66,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public long deleteData (String id){
+    public long deleteData (String msg){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME,"ID=?",new String[]{id});
+        return db.delete(TABLE_NAME,"MASSAGE=?",new String[]{msg});
+
+
 
 
     }

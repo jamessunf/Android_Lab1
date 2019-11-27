@@ -36,6 +36,8 @@ public class Lab8Activity extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btn_send);
         edtInput = (EditText) findViewById(R.id.edt_input);
         myListView = (ListView) findViewById(R.id.lst_person);
+        person = new ArrayList<>();
+        viewData();
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,8 +46,12 @@ public class Lab8Activity extends AppCompatActivity {
                 String strId = String.valueOf(position);
 
                 Toast.makeText(Lab8Activity.this,strId,Toast.LENGTH_SHORT).show();
-                firstFragment = FirstFragment.newInstance(strId,person.get(position).getMassage());
+               firstFragment = FirstFragment.newInstance(strId,person.get(position).getMassage());
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,firstFragment,"first_frag").commitAllowingStateLoss();
+
+              //  myDb.deleteData(person.get(position).getMassage());
+                viewData();
+
 
 
 
@@ -60,8 +66,7 @@ public class Lab8Activity extends AppCompatActivity {
 
 
 
-        person = new ArrayList<>();
-        viewData();
+
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.android_lab1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -44,7 +45,7 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         
-        DatabaseHelper mydb=null;
+        final DatabaseHelper mydb = new DatabaseHelper(getActivity());
 
         txtMsg = (TextView) view.findViewById(R.id.txt_msg);
         txtId = (TextView) view.findViewById(R.id.txt_id);
@@ -54,8 +55,11 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-               // final long input_id = mydb.deleteData(getArguments().getString("input_id"));
+              String msg = getArguments().getString("input_msg");
+
+               long input_id = mydb.deleteData(msg);
                 Toast.makeText(getActivity(),"del=" + getArguments().getString("input_id"),Toast.LENGTH_SHORT).show();
+
             }
         });
 
